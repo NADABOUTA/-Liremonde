@@ -1,0 +1,386 @@
+/* ============================================
+   style.css — Styles globaux LireMonde
+   ============================================ */
+
+/* ─── Variables de couleurs ──────────────── */
+:root {
+  --couleur-primaire: #2c3e50;
+  --couleur-secondaire: #e74c3c;
+  --couleur-accent: #f39c12;
+  --couleur-fond: #f8f5f0;
+  --couleur-carte: #ffffff;
+  --couleur-texte: #2c3e50;
+  --couleur-texte-clair: #7f8c8d;
+  --couleur-succes: #27ae60;
+  --ombre: 0 4px 15px rgba(0, 0, 0, 0.1);
+  --rayon: 12px;
+  --transition: all 0.3s ease;
+}
+
+/* ─── Reset de base ──────────────────────── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  background-color: var(--couleur-fond);
+  color: var(--couleur-texte);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ─── Navbar ──────────────────────────────── */
+.navbar {
+  background-color: var(--couleur-primaire);
+  color: white;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 65px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.navbar-logo span {
+  color: var(--couleur-accent);
+}
+
+.navbar-liens {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.navbar-liens a {
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: var(--transition);
+  font-size: 0.95rem;
+}
+
+.navbar-liens a:hover,
+.navbar-liens a.actif {
+  background-color: var(--couleur-secondaire);
+}
+
+.navbar-recherche {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-recherche input {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  width: 220px;
+  outline: none;
+}
+
+/* ─── Contenu principal ──────────────────── */
+.contenu-principal {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* ─── Titre de section ─────────────────────── */
+.titre-section {
+  font-size: 1.8rem;
+  color: var(--couleur-primaire);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--couleur-accent);
+  display: inline-block;
+}
+
+/* ─── Filtres de genre ────────────────────── */
+.conteneur-filtres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.btn-filtre {
+  padding: 0.5rem 1.2rem;
+  border: 2px solid var(--couleur-primaire);
+  background: white;
+  color: var(--couleur-primaire);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+.btn-filtre:hover,
+.btn-filtre.actif {
+  background-color: var(--couleur-primaire);
+  color: white;
+}
+
+/* ─── Grille de livres ─────────────────────── */
+.grille-livres {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ─── Carte livre ──────────────────────────── */
+.carte-livre {
+  background: var(--couleur-carte);
+  border-radius: var(--rayon);
+  overflow: hidden;
+  box-shadow: var(--ombre);
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.carte-livre:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.carte-image {
+  position: relative;
+  height: 250px;
+  overflow: hidden;
+}
+
+.carte-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge-genre {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: var(--couleur-secondaire);
+  color: white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.carte-info {
+  padding: 1rem;
+}
+
+.carte-titre {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+  color: var(--couleur-primaire);
+}
+
+.carte-auteur {
+  font-size: 0.85rem;
+  color: var(--couleur-texte-clair);
+  margin-bottom: 0.8rem;
+}
+
+.carte-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* ─── Boutons ─────────────────────────────── */
+.btn-details {
+  padding: 0.4rem 0.8rem;
+  background-color: var(--couleur-primaire);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: var(--transition);
+}
+
+.btn-details:hover {
+  background-color: var(--couleur-secondaire);
+}
+
+.btn-alire {
+  padding: 0.4rem 0.8rem;
+  background-color: white;
+  color: var(--couleur-primaire);
+  border: 2px solid var(--couleur-primaire);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: var(--transition);
+}
+
+.btn-alire:hover,
+.btn-alire.actif {
+  background-color: var(--couleur-succes);
+  border-color: var(--couleur-succes);
+  color: white;
+}
+
+/* ─── Modale ──────────────────────────────── */
+.modale-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modale-overlay.cachee {
+  display: none;
+}
+
+.modale-contenu {
+  background: white;
+  border-radius: var(--rayon);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modale-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.modale-header h2 {
+  font-size: 1.3rem;
+  color: var(--couleur-primaire);
+}
+
+.btn-fermer {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--couleur-texte-clair);
+  transition: var(--transition);
+}
+
+.btn-fermer:hover {
+  color: var(--couleur-secondaire);
+}
+
+.modale-body {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+
+.modale-image {
+  width: 160px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+  box-shadow: var(--ombre);
+}
+
+.modale-details {
+  flex: 1;
+}
+
+.modale-details p {
+  margin-bottom: 0.5rem;
+  color: var(--couleur-texte-clair);
+  font-size: 0.95rem;
+}
+
+.modale-description {
+  margin-top: 1rem;
+  color: var(--couleur-texte) !important;
+  line-height: 1.7;
+}
+
+.modale-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
+/* ─── Message vide ────────────────────────── */
+.message-vide {
+  text-align: center;
+  padding: 3rem;
+  color: var(--couleur-texte-clair);
+  font-size: 1.1rem;
+  grid-column: 1 / -1;
+}
+
+/* ─── Footer ──────────────────────────────── */
+footer {
+  background-color: var(--couleur-primaire);
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 2rem;
+  margin-top: 4rem;
+}
+
+footer p {
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+footer strong {
+  color: var(--couleur-accent);
+}
+
+/* ─── Responsive ──────────────────────────── */
+@media (max-width: 768px) {
+  .navbar {
+    flex-wrap: wrap;
+    height: auto;
+    padding: 1rem;
+    gap: 0.5rem;
+  }
+
+  .navbar-recherche input {
+    width: 150px;
+  }
+
+  .grille-livres {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .modale-body {
+    flex-direction: column;
+  }
+
+  .modale-image {
+    width: 100%;
+    height: 200px;
+  }
+}

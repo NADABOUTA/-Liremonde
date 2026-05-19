@@ -1,0 +1,77 @@
+{
+  "livres": [
+    {
+      "id": "1",
+      "titre": "Le Petit Prince",
+      "auteur": "Antoine de Saint-Exupéry",
+      "genre": "Classique",
+      "description": "Un aviateur tombe en panne dans le désert du Sahara et rencontre un mystérieux petit garçon venu d'une autre planète. Une fable poétique et philosophique sur l'amitié, l'amour et la perte de l'innocence.",
+      "couverture": "https://covers.openlibrary.org/b/id/8739161-L.jpg",
+      "aLire": true
+    },
+    {
+      "id": "2",
+      "titre": "Dune",
+      "auteur": "Frank Herbert",
+      "genre": "Science-fiction",
+      "description": "Sur la planète désertique Arrakis, la seule source d'épice mélange, substance la plus précieuse de l'univers, Paul Atreides découvre sa destinée au milieu d'intrigues politiques et de prophéties millénaires.",
+      "couverture": "https://covers.openlibrary.org/b/id/8737937-L.jpg",
+      "aLire": false
+    },
+    {
+      "id": "3",
+      "titre": "Les Misérables",
+      "auteur": "Victor Hugo",
+      "genre": "Drame",
+      "description": "L'histoire de Jean Valjean, ancien forçat cherchant sa rédemption dans une France du XIXe siècle marquée par la misère, l'injustice sociale et les luttes révolutionnaires.",
+      "couverture": "https://covers.openlibrary.org/b/id/8406786-L.jpg",
+      "aLire": false
+    },
+    {
+      "id": "4",
+      "titre": "Le Seigneur des Anneaux",
+      "auteur": "J.R.R. Tolkien",
+      "genre": "Fantasy",
+      "description": "Frodon Sacquet doit détruire l'Anneau Unique dans les feux de la Montagne du Destin. Une épopée mythique à travers la Terre du Milieu, mêlant courage, amitié et sacrifice.",
+      "couverture": "https://covers.openlibrary.org/b/id/8743474-L.jpg",
+      "aLire": false
+    },
+    {
+      "id": "5",
+      "titre": "1984",
+      "auteur": "George Orwell",
+      "genre": "Science-fiction",
+      "description": "Dans une société totalitaire où Big Brother surveille tout, Winston Smith ose remettre en question le régime. Un roman dystopique visionnaire sur la manipulation, la liberté et la résistance.",
+      "couverture": "https://covers.openlibrary.org/b/id/8575708-L.jpg",
+      "aLire": false
+    },
+    {
+      "id": "6",
+      "titre": "Harry Potter à l'École des Sorciers",
+      "auteur": "J.K. Rowling",
+      "genre": "Fantasy",
+      "description": "Le jeune Harry Potter découvre le jour de ses 11 ans qu'il est un sorcier. Il rejoint Poudlard, une école de magie, où l'aventure et le danger l'attendent à chaque tournant.",
+      "couverture": "https://covers.openlibrary.org/b/id/10110415-L.jpg",
+      "aLire": false
+    },
+    {
+      "id": "7",
+      "titre": "Madame Bovary",
+      "auteur": "Gustave Flaubert",
+      "genre": "Classique",
+      "description": "Emma Bovary, femme d'un médecin de campagne, cherche désespérément à fuir la médiocrité de sa vie à travers des aventures amoureuses. Un chef-d'œuvre du réalisme français.",
+      "couverture": "https://covers.openlibrary.org/b/id/8736782-L.jpg",
+      "aLire": false
+    },
+    {
+      "id": "8",
+      "titre": "Roméo et Juliette",
+      "auteur": "William Shakespeare",
+      "genre": "Drame",
+      "description": "L'histoire tragique de deux jeunes amants issus de familles ennemies dans la ville de Vérone. Une pièce intemporelle sur l'amour absolu et ses conséquences fatales.",
+      "couverture": "https://covers.openlibrary.org/b/id/8739696-L.jpg",
+      "aLire": false
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

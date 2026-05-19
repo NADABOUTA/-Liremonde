@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LireMonde — Accueil</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════ -->
+  <nav class="navbar">
+    <div class="navbar-logo">📚 <span>Lire</span>Monde</div>
+
+    <ul class="navbar-liens">
+      <li><a href="index.html" class="actif">🏠 Accueil</a></li>
+      <li><a href="alire.html">❤️ À lire</a></li>
+      <li><a href="admin/admin.html">⚙️ Admin</a></li>
+    </ul>
+
+    <div class="navbar-recherche">
+      <input
+        type="text"
+        id="barre-recherche"
+        placeholder="🔍 Rechercher un livre..."
+      />
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       CONTENU PRINCIPAL
+  ═══════════════════════════════════════ -->
+  <main class="contenu-principal">
+
+    <h1 class="titre-section">Catalogue de livres</h1>
+
+    <!-- Filtres par genre (générés dynamiquement) -->
+    <div class="conteneur-filtres" id="filtres-genre">
+      <!-- Les boutons de filtre sont créés par JS -->
+    </div>
+
+    <!-- Grille des livres (générée dynamiquement) -->
+    <div class="grille-livres" id="grille-livres">
+      <!-- Les cartes sont générées par JS -->
+      <p class="message-vide">⏳ Chargement des livres...</p>
+    </div>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════
+       MODALE — Détails d'un livre
+  ═══════════════════════════════════════ -->
+  <div class="modale-overlay cachee" id="modale">
+    <div class="modale-contenu">
+
+      <!-- En-tête -->
+      <div class="modale-header">
+        <h2 id="modale-titre">Titre du livre</h2>
+        <button class="btn-fermer" onclick="fermerModale()">✕</button>
+      </div>
+
+      <!-- Corps -->
+      <div class="modale-body">
+        <img
+          src=""
+          alt="Couverture"
+          class="modale-image"
+          id="modale-image"
+          onerror="this.src='https://via.placeholder.com/160x220?text=?'"
+        />
+        <div class="modale-details">
+          <p id="modale-auteur"></p>
+          <p id="modale-genre"></p>
+          <p class="modale-description" id="modale-description"></p>
+        </div>
+      </div>
+
+      <!-- Pied -->
+      <div class="modale-footer">
+        <button class="btn-alire" id="modale-btn-alire">🤍 Ajouter à la liste</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer>
+    <p><strong>LireMonde</strong> — Votre espace de lecture en ligne</p>
+    <p>© 2026 ReadSphere. Tous droits réservés.</p>
+  </footer>
+
+  <!-- Scripts JS — api.js TOUJOURS en premier -->
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
