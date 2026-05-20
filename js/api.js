@@ -1,6 +1,5 @@
 // ============================================
 // api.js — Toutes les requêtes vers JSON Server
-// URL de base de l'API
 // ============================================
 
 const API_URL = "http://localhost:3002/livres";
@@ -11,7 +10,7 @@ const API_URL = "http://localhost:3002/livres";
 async function getAllLivres() {
   try {
     const response = await fetch(API_URL);
-    if (!response.ok) throw new Error("Erreur lors du chargement des livres");
+    if (!response.ok) throw new Error("Erreur chargement livres");
     const livres = await response.json();
     return livres;
   } catch (error) {
@@ -21,7 +20,7 @@ async function getAllLivres() {
 }
 
 // ─────────────────────────────────────────────
-// GET — Récupérer un livre par son id
+// GET — Récupérer un livre par id
 // ─────────────────────────────────────────────
 async function getLivreById(id) {
   try {
@@ -36,60 +35,6 @@ async function getLivreById(id) {
 }
 
 // ─────────────────────────────────────────────
-// POST — Ajouter un nouveau livre
-// ─────────────────────────────────────────────
-async function ajouterLivre(nouveauLivre) {
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(nouveauLivre),
-    });
-    if (!response.ok) throw new Error("Erreur lors de l'ajout du livre");
-    const livre = await response.json();
-    return livre;
-  } catch (error) {
-    console.error("ajouterLivre:", error.message);
-    return null;
-  }
-}
-
-// ─────────────────────────────────────────────
-// PUT — Modifier un livre complet
-// ─────────────────────────────────────────────
-async function modifierLivre(id, livreModifie) {
-  try {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(livreModifie),
-    });
-    if (!response.ok) throw new Error("Erreur lors de la modification");
-    const livre = await response.json();
-    return livre;
-  } catch (error) {
-    console.error("modifierLivre:", error.message);
-    return null;
-  }
-}
-
-// ─────────────────────────────────────────────
-// DELETE — Supprimer un livre
-// ─────────────────────────────────────────────
-async function supprimerLivre(id) {
-  try {
-    const response = await fetch(`${API_URL}/${id}`, {
-      method: "DELETE",
-    });
-    if (!response.ok) throw new Error("Erreur lors de la suppression");
-    return true;
-  } catch (error) {
-    console.error("supprimerLivre:", error.message);
-    return false;
-  }
-}
-
-// ─────────────────────────────────────────────
 // PATCH — Ajouter / retirer de la liste À lire
 // ─────────────────────────────────────────────
 async function toggleALire(id, valeur) {
@@ -99,7 +44,7 @@ async function toggleALire(id, valeur) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ aLire: valeur }),
     });
-    if (!response.ok) throw new Error("Erreur lors de la mise à jour À lire");
+    if (!response.ok) throw new Error("Erreur toggle À lire");
     const livre = await response.json();
     return livre;
   } catch (error) {
