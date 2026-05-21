@@ -1,16 +1,16 @@
 // ============================================
-// main.js — Page Accueil (modale + À lire)
+// main.js — Page Accueil
 // ============================================
 
-// Variables globales
 let tousLesLivres = [];
-let genreActif = "Tous";
-let recherche = "";
+let genreActif    = "Tous";
+let recherche     = "";
 
-// Lancement au chargement
+// Lancement au chargement de la page
 document.addEventListener("DOMContentLoaded", async () => {
   await chargerLivres();
-  ecouterRecherche();
+   ecouterRecherche();
+  //  animerCompteurHero();
 });
 
 // ─────────────────────────────────────────────
@@ -21,7 +21,7 @@ async function chargerLivres() {
 
   if (tousLesLivres.length === 0) {
     document.getElementById("grille-livres").innerHTML =
-      `<p class="message-vide">📭 Aucun livre disponible.</p>`;
+      `<p class="message-vide"> Aucun livre disponible. Vérifiez que JSON Server est démarré.</p>`;
     return;
   }
 
@@ -30,7 +30,7 @@ async function chargerLivres() {
 }
 
 // ─────────────────────────────────────────────
-// 2. Générer les boutons filtres par genre
+// 2. Générer les boutons de filtre par genre
 // ─────────────────────────────────────────────
 function genererFiltres() {
   const conteneur = document.getElementById("filtres-genre");
@@ -84,44 +84,50 @@ function afficherGrille(livres) {
   grille.innerHTML = "";
 
   if (livres.length === 0) {
-    grille.innerHTML = `<p class="message-vide">🔍 Aucun livre trouvé.</p>`;
+    grille.innerHTML = `<p class="message-vide"> Aucun livre trouvé.</p>`;
     return;
   }
 
-  livres.forEach(livre => {
-    const carte = creerCarteLivre(livre);
-    grille.appendChild(carte);
-  });
+  livres.forEach(livre => grille.appendChild(creerCarteLivre(livre)));
 }
 
 // ─────────────────────────────────────────────
-// 5. Créer une carte livre avec boutons
+// 5. Créer une carte livre
 // ─────────────────────────────────────────────
 function creerCarteLivre(livre) {
   const carte = document.createElement("div");
   carte.classList.add("carte-livre");
 
+  const fallback =
+    "https://via.placeholder.com/200x280/2c3e50/ffffff?text=📚";
+
   carte.innerHTML = `
     <div class="carte-image">
-      <img
-        src="${livre.couverture}"
+      <img 
+        src="${livre.couverture}" 
         alt="${livre.titre}"
-        onerror="this.src='https://via.placeholder.com/200x280?text=?'"
+         onerror="this.onerror=null; this.src='${fallback}';"
       />
-      <span class="badge-genre">${livre.genre}</span>
     </div>
+
     <div class="carte-info">
+      <span class="badge-genre">${livre.genre}</span>
+
       <h3 class="carte-titre">${livre.titre}</h3>
-      <p class="carte-auteur">✍️ ${livre.auteur}</p>
+
+      <p class="carte-auteur">${livre.auteur}</p>
+
       <div class="carte-actions">
-        <button class="btn-details" onclick="ouvrirModale(${livre.id})">
-          🔍 Détails
+        <button 
+          class="btn-details" 
+          onclick="ouvrirModale(${livre.id})">
+          Détails
         </button>
-        <button
+
+        <button 
           class="btn-alire ${livre.aLire ? "actif" : ""}"
-          onclick="basculerALire(event, ${livre.id})"
-        >
-          ${livre.aLire ? "❤️ Retiré" : "🤍 À lire"}
+          onclick="basculerALire(event, ${livre.id})">
+          ${livre.aLire ? "Retiré" : "À lire"}
         </button>
       </div>
     </div>
@@ -136,54 +142,43 @@ function creerCarteLivre(livre) {
 function ecouterRecherche() {
   const input = document.getElementById("barre-recherche");
   if (!input) return;
-
-  input.addEventListener("input", (e) => {
+  input.addEventListener("input", e => {
     recherche = e.target.value;
     afficherLivresFiltres();
   });
 }
 
 // ─────────────────────────────────────────────
-// 7. Ouvrir la modale avec les détails
+// 7. Ouvrir la modale
 // ─────────────────────────────────────────────
 async function ouvrirModale(id) {
   const livre = await getLivreById(id);
   if (!livre) return;
 
-  // Remplir les éléments de la modale
-  document.getElementById("modale-image").src = livre.couverture;
-  document.getElementById("modale-image").alt = livre.titre;
-  document.getElementById("modale-titre").textContent = livre.titre;
-  document.getElementById("modale-auteur").textContent = "✍️ " + livre.auteur;
-  document.getElementById("modale-genre").textContent = "📚 " + livre.genre;
+  document.getElementById("modale-image").src             = livre.couverture || "";
+  document.getElementById("modale-image").alt             = livre.titre;
+  document.getElementById("modale-titre").textContent     = livre.titre;
+  document.getElementById("modale-auteur").textContent    = livre.auteur;
+  document.getElementById("modale-genre").textContent     = livre.genre;
   document.getElementById("modale-description").textContent = livre.description;
 
-  // Bouton À lire dans la modale
-  const btnALire = document.getElementById("modale-btn-alire");
-  btnALire.textContent = livre.aLire ? "❤️ Retirer de la liste" : "🤍 Ajouter à la liste";
-  btnALire.className = "btn-alire " + (livre.aLire ? "actif" : "");
+  const btn = document.getElementById("modale-btn-alire");
+  btn.textContent = livre.aLire ? " Retirer de la liste" : " Ajouter à la liste";
+  btn.className   = "btn-alire " + (livre.aLire ? "actif" : "");
 
-  // Au clic sur le bouton de la modale
-  btnALire.onclick = async () => {
+  btn.onclick = async () => {
     const nouvelleValeur = !livre.aLire;
     const resultat = await toggleALire(livre.id, nouvelleValeur);
-
     if (resultat) {
-      // Mettre à jour localement
       livre.aLire = nouvelleValeur;
       const livreLocal = tousLesLivres.find(l => l.id === livre.id);
       if (livreLocal) livreLocal.aLire = nouvelleValeur;
-
-      // Mettre à jour le bouton dans la modale
-      btnALire.textContent = nouvelleValeur ? "❤️ Retirer de la liste" : "🤍 Ajouter à la liste";
-      btnALire.className = "btn-alire " + (nouvelleValeur ? "actif" : "");
-
-      // Rafraîchir la grille
+      btn.textContent = nouvelleValeur ? " Retirer de la liste" : " Ajouter à la liste";
+      btn.className   = "btn-alire " + (nouvelleValeur ? "actif" : "");
       afficherLivresFiltres();
     }
   };
 
-  // Afficher la modale
   document.getElementById("modale").classList.remove("cachee");
 }
 
@@ -194,26 +189,40 @@ function fermerModale() {
   document.getElementById("modale").classList.add("cachee");
 }
 
-// Fermer en cliquant sur le fond noir
-document.addEventListener("click", (e) => {
-  const modale = document.getElementById("modale");
-  if (e.target === modale) fermerModale();
+// Fermer avec clic sur fond ou touche Échap
+document.addEventListener("click", e => {
+  if (e.target === document.getElementById("modale")) fermerModale();
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") fermerModale();
 });
 
 // ─────────────────────────────────────────────
-// 9. Toggle À lire depuis la carte
+// 9. Toggle À lire depuis carte
 // ─────────────────────────────────────────────
 async function basculerALire(event, id) {
-  event.stopPropagation(); // Éviter d'ouvrir la modale
-
+  event.stopPropagation();
   const livre = tousLesLivres.find(l => l.id === id);
   if (!livre) return;
-
-  const nouvelleValeur = !livre.aLire;
-  const resultat = await toggleALire(id, nouvelleValeur);
-
+  const resultat = await toggleALire(id, !livre.aLire);
   if (resultat) {
-    livre.aLire = nouvelleValeur;
-    afficherLivresFiltres(); // Rafraîchir sans rechargement
+    livre.aLire = !livre.aLire;
+    afficherLivresFiltres();
   }
 }
+
+// ─────────────────────────────────────────────
+// 10. Compteur animé dans le hero
+// ─────────────────────────────────────────────
+// async function animerCompteurHero() {
+//   const el = document.getElementById("stat-livres");
+//   if (!el) return;
+//   const livres = await getAllLivres();
+//   const total  = livres.length;
+//   let compteur = 0;
+//   const intervalle = setInterval(() => {
+//     compteur++;
+//     el.textContent = compteur;
+//     if (compteur >= total) clearInterval(intervalle);
+//   }, 150);
+// }

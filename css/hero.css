@@ -1,0 +1,242 @@
+/* ============================================
+   hero.css — Section Hero page Accueil
+   ============================================ */
+
+.hero {
+  background: linear-gradient(135deg, #1a2535 0%, #2c3e50 50%, #1e3a5f 100%);
+  min-height: 90vh;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 5rem 6rem;
+  position: relative;
+  overflow: hidden;
+
+  gap: 3rem;
+  text-align: center;
+}
+
+
+
+/* ─── Contenu texte ───────────────── */
+.hero-contenu {
+  flex: 1;
+  max-width: 540px;
+
+  position: relative;
+  z-index: 2;
+
+  animation: glisser-gauche 0.8s ease both;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes glisser-gauche {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-badge {
+  display: inline-block;
+
+  background: rgba(243,156,18,0.2);
+  color: #f39c12;
+  border: 1px solid rgba(243,156,18,0.4);
+
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+
+  text-align: center;
+}
+
+.hero-titre {
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: white;
+
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+
+  font-family: Georgia, serif;
+  text-align: center;
+}
+
+.hero-titre-accent {
+  color: #f39c12;
+  position: relative;
+  display: inline-block;
+}
+
+.hero-titre-accent::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+
+  width: 100%;
+  height: 3px;
+
+  background: #f39c12;
+  border-radius: 2px;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.75);
+
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+
+  max-width: 460px;
+  text-align: center;
+}
+
+/* ─── Boutons hero ───────────────────────── */
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 1rem;
+  margin-bottom: 3rem;
+
+  flex-wrap: wrap;
+}
+
+.hero-btn-principal {
+  padding: 0.9rem 2rem;
+
+  background: #f39c12;
+  color: #1a2535;
+
+  border-radius: 8px;
+
+  font-weight: bold;
+  font-size: 1rem;
+
+  transition: all 0.3s ease;
+  display: inline-block;
+
+  text-align: center;
+}
+
+.hero-btn-principal:hover {
+  background: #e67e22;
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 25px rgba(243,156,18,0.4);
+}
+
+.hero-btn-secondaire {
+  padding: 0.9rem 2rem;
+
+  background: transparent;
+  color: white;
+
+  border: 2px solid rgba(255,255,255,0.3);
+  border-radius: 8px;
+
+  font-size: 1rem;
+
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.hero-btn-secondaire:hover {
+  background: rgba(255,255,255,0.1);
+
+  border-color: white;
+
+  transform: translateY(-2px);
+}
+
+/* ─── Responsive hero ────────────────────── */
+
+@media (max-width: 1100px) {
+  .hero {
+    padding: 4rem 3rem;
+  }
+
+  .hero-titre {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 850px) {
+  .hero {
+    padding: 3rem 2rem;
+    min-height: auto;
+  }
+
+  .hero-contenu {
+    max-width: 100%;
+  }
+
+  .hero-titre {
+    font-size: 2rem;
+  }
+
+  .hero-description {
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-stats {
+    justify-content: center;
+  }
+
+  .livre-centre {
+    width: 130px;
+    height: 180px;
+  }
+
+  .livre-haut-droite,
+  .livre-bas-gauche {
+    width: 100px;
+    height: 140px;
+  }
+
+  .livre-haut-gauche {
+    width: 80px;
+    height: 115px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 2rem 1.2rem;
+  }
+
+  .hero-titre {
+    font-size: 1.7rem;
+  }
+
+  .hero-badge-flottant {
+    display: none;
+  }
+}

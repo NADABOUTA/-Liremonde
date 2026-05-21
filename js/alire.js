@@ -2,7 +2,6 @@
 // alire.js — Page "À lire"
 // ============================================
 
-// Lancement au chargement
 document.addEventListener("DOMContentLoaded", async () => {
   await chargerListeALire();
 });
@@ -12,57 +11,40 @@ document.addEventListener("DOMContentLoaded", async () => {
 // ─────────────────────────────────────────────
 async function chargerListeALire() {
   const tousLesLivres = await getAllLivres();
-
-  // Garder uniquement ceux avec aLire = true
-  const listeLivres = tousLesLivres.filter(livre => livre.aLire === true);
-
+  const liste = tousLesLivres.filter(l => l.aLire === true);
   const conteneur = document.getElementById("liste-alire");
   conteneur.innerHTML = "";
 
-  // Si la liste est vide
-  if (listeLivres.length === 0) {
-    conteneur.innerHTML = `
-      <div class="message-vide">
-        <p>📭 Votre liste de lecture est vide.</p>
-        <a href="index.html" class="btn-retour">← Découvrir des livres</a>
-      </div>
-    `;
-    document.getElementById("compteur-alire").textContent = "0 livre dans votre liste";
+  if (liste.length === 0) {
+    afficherEtatVide(" Votre liste de lecture est vide.");
+    mettreAJourCompteur(0);
     return;
   }
 
-  // Afficher chaque livre
-  listeLivres.forEach(livre => {
-    const carte = creerCarteALire(livre);
-    conteneur.appendChild(carte);
-  });
-
-  // Afficher le compteur
-  document.getElementById("compteur-alire").textContent =
-    `${listeLivres.length} livre(s) dans votre liste`;
+  liste.forEach(livre => conteneur.appendChild(creerCarteALire(livre)));
+  mettreAJourCompteur(liste.length);
 }
 
 // ─────────────────────────────────────────────
-// 2. Créer une carte pour la liste À lire
+// 2. Créer une carte horizontale
 // ─────────────────────────────────────────────
 function creerCarteALire(livre) {
   const carte = document.createElement("div");
   carte.classList.add("carte-alire");
   carte.id = `carte-${livre.id}`;
 
+   const fallback = "https://via.placeholder.com/80x110/2c3e50/ffffff?text=📚";
+
   carte.innerHTML = `
-    <img
-      src="${livre.couverture}"
-      alt="${livre.titre}"
-      onerror="this.src='https://via.placeholder.com/80x110?text=?'"
-    />
+    <img src="${livre.couverture}" alt="${livre.titre}"
+          onerror="this.onerror=null; this.src='${fallback}';"/>
     <div class="info-alire">
       <h3>${livre.titre}</h3>
-      <p class="auteur-alire">✍️ ${livre.auteur}</p>
-      <span class="badge-genre">${livre.genre}</span>
+      <p class="auteur-alire"> ${livre.auteur}</p>
+      <span class="badge-genre-alire">${livre.genre}</span>
     </div>
     <button class="btn-supprimer" onclick="retirerDeLaListe(${livre.id})">
-      🗑️ Retirer
+       Retirer
     </button>
   `;
 
@@ -70,13 +52,11 @@ function creerCarteALire(livre) {
 }
 
 // ─────────────────────────────────────────────
-// 3. Retirer un livre de la liste (PATCH)
+// 3. Retirer un livre (PATCH aLire = false)
 // ─────────────────────────────────────────────
 async function retirerDeLaListe(id) {
   const resultat = await toggleALire(id, false);
-
   if (resultat) {
-    // Supprimer la carte du DOM avec animation
     const carte = document.getElementById(`carte-${id}`);
     if (carte) {
       carte.classList.add("suppression");
@@ -89,22 +69,34 @@ async function retirerDeLaListe(id) {
 }
 
 // ─────────────────────────────────────────────
-// 4. Vérifier si la liste est vide après suppression
+// 4. Vérifier si la liste est vide
 // ─────────────────────────────────────────────
 function verifierListeVide() {
-  const conteneur = document.getElementById("liste-alire");
-  const cartes = conteneur.querySelectorAll(".carte-alire");
-
+  const cartes = document.querySelectorAll(".carte-alire");
   if (cartes.length === 0) {
-    conteneur.innerHTML = `
-      <div class="message-vide">
-        <p>📭 Votre liste de lecture est vide.</p>
-        <a href="index.html" class="btn-retour">← Découvrir des livres</a>
-      </div>
-    `;
-    document.getElementById("compteur-alire").textContent = "0 livre dans votre liste";
+    afficherEtatVide(" Votre liste de lecture est vide.");
+    mettreAJourCompteur(0);
   } else {
-    document.getElementById("compteur-alire").textContent =
-      `${cartes.length} livre(s) dans votre liste`;
+    mettreAJourCompteur(cartes.length);
   }
+}
+
+// ─────────────────────────────────────────────
+// Utilitaires
+// ─────────────────────────────────────────────
+function afficherEtatVide(message) {
+  document.getElementById("liste-alire").innerHTML = `
+    <div class="message-vide">
+      <p>${message}</p>
+      <a href="index.html" class="btn-retour">← Découvrir des livres</a>
+    </div>
+  `;
+}
+
+function mettreAJourCompteur(nombre) {
+  const el = document.getElementById("compteur-alire");
+  if (!el) return;
+  el.textContent = nombre === 0
+    ? "Aucun livre dans votre liste"
+    : `${nombre} livre${nombre > 1 ? "s" : ""} dans votre liste`;
 }

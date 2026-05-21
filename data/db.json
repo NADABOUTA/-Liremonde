@@ -1,4 +1,3 @@
-
 {
   "livres": [
     {
@@ -17,7 +16,7 @@
       "genre": "Science-fiction",
       "description": "Sur la planète désertique Arrakis, la seule source d'épice mélange, substance la plus précieuse de l'univers, Paul Atreides découvre sa destinée au milieu d'intrigues politiques et de prophéties millénaires.",
       "couverture": "https://covers.openlibrary.org/b/id/8737937-L.jpg",
-      "aLire": false
+      "aLire": true
     },
     {
       "id": "3",
@@ -26,7 +25,7 @@
       "genre": "Drame",
       "description": "L'histoire de Jean Valjean, ancien forçat cherchant sa rédemption dans une France du XIXe siècle marquée par la misère, l'injustice sociale et les luttes révolutionnaires.",
       "couverture": "https://covers.openlibrary.org/b/id/8406786-L.jpg",
-      "aLire": false
+      "aLire": true
     },
     {
       "id": "4",
@@ -71,7 +70,16 @@
       "genre": "Drame",
       "description": "L'histoire tragique de deux jeunes amants issus de familles ennemies dans la ville de Vérone. Une pièce intemporelle sur l'amour absolu et ses conséquences fatales.",
       "couverture": "https://covers.openlibrary.org/b/id/8739696-L.jpg",
-      "aLire": false
+      "aLire": true
+    },
+    {
+      "titre": "La princesse NADA",
+      "auteur": "NADA",
+      "genre": "Romance",
+      "description": "AZEDRFGHJNK?.?NBVCXDFTGYUHJIKOLMKJHGFDCVHGFXCV VCDFTGYUH",
+      "couverture": "",
+      "aLire": false,
+      "id": "Y-Cj7Zde668"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

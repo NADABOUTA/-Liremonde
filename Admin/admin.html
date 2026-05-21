@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LireMonde — Administration</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/admin.css" />
+</head>
+<body>
+
+  <!-- ══════════════════ NAVBAR ══════════════════ -->
+  <nav class="navbar">
+    <div class="navbar-logo"><span>Lire</span>Monde</div>
+    <ul class="navbar-liens">
+      <li><a href="../index.html"> Accueil</a></li>
+      <li><a href="../alire.html"> À lire</a></li>
+      <li><a href="admin.html" class="actif"> Admin</a></li>
+    </ul>
+    <div class="navbar-recherche">
+      <input type="text" placeholder="🔍 Rechercher..." />
+    </div>
+  </nav>
+
+  <!-- ══════════════════ CONTENU ══════════════════ -->
+  <main class="contenu-principal">
+    <h1 class="titre-section"> Tableau de bord Admin</h1>
+
+    <div class="layout-admin">
+
+      <!-- FORMULAIRE -->
+      <section class="formulaire-admin" id="section-formulaire">
+        <h2 id="form-titre">➕ Ajouter un livre</h2>
+        <form id="form-livre">
+          <div class="groupe-champ">
+            <label for="input-titre">Titre *</label>
+            <input type="text" id="input-titre" placeholder="Ex : Le Petit Prince" required />
+          </div>
+          <div class="groupe-champ">
+            <label for="input-auteur">Auteur *</label>
+            <input type="text" id="input-auteur" placeholder="Ex : Victor Hugo" required />
+          </div>
+          <div class="groupe-champ">
+            <label for="input-genre">Genre *</label>
+            <select id="input-genre" required>
+              <option value="">-- Choisir un genre --</option>
+              <option value="Classique">Classique</option>
+              <option value="Science-fiction">Science-fiction</option>
+              <option value="Drame">Drame</option>
+              <option value="Fantasy">Fantasy</option>
+              <option value="Aventure">Aventure</option>
+              <option value="Romance">Romance</option>
+              <option value="Policier">Policier</option>
+            </select>
+          </div>
+          <div class="groupe-champ">
+            <label for="input-description">Description *</label>
+            <textarea id="input-description" placeholder="Résumé du livre..." required></textarea>
+          </div>
+          <div class="groupe-champ">
+            <label for="input-couverture">URL de la couverture</label>
+            <input type="url" id="input-couverture" placeholder="https://..." />
+          </div>
+          <button type="submit" class="btn-soumettre" id="btn-soumettre">Ajouter le livre</button>
+          <button type="button" class="btn-annuler" onclick="reinitialiserFormulaire()">
+            Annuler / Réinitialiser
+          </button>
+        </form>
+      </section>
+
+      <!-- TABLEAU -->
+      <section class="section-tableau">
+        <h2> Tous les livres</h2>
+        <table class="table-livres">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Titre</th>
+              <th>Auteur</th>
+              <th>Genre</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableau-livres">
+            <tr><td colspan="5" class="message-vide">⏳ Chargement...</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Toast notification -->
+  <div class="notification" id="notification"></div>
+
+  <!-- ══════════════════ FOOTER ══════════════════ -->
+  <footer>
+    <p><strong>LireMonde</strong> — Espace d'administration</p>
+    <p>© 2026 ReadSphere. Tous droits réservés.</p>
+  </footer>
+
+  <script src="../js/api.js"></script>
+  <script src="../js/admin.js"></script>
+
+</body>
+</html>

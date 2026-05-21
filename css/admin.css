@@ -1,0 +1,209 @@
+/* ============================================
+   admin.css — Styles page Administration
+   ============================================ */
+
+.layout-admin {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ─── Formulaire ─────────────────────────── */
+.formulaire-admin {
+  background: white;
+  border-radius: var(--rayon);
+  padding: 1.5rem;
+  box-shadow: var(--ombre);
+  position: sticky;
+  top: 80px;
+}
+
+.formulaire-admin h2 {
+  margin-bottom: 1.2rem;
+  color: var(--primaire);
+  font-size: 1.15rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--fond);
+}
+
+.groupe-champ { margin-bottom: 1rem; }
+
+.groupe-champ label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--texte);
+}
+
+.groupe-champ input,
+.groupe-champ select,
+.groupe-champ textarea {
+  width: 100%;
+  padding: 0.6rem 0.9rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  transition: var(--transition);
+  color: var(--texte);
+  background: white;
+}
+
+.groupe-champ input:focus,
+.groupe-champ select:focus,
+.groupe-champ textarea:focus {
+  border-color: var(--primaire);
+  box-shadow: 0 0 0 3px rgba(44,62,80,0.1);
+}
+
+.groupe-champ textarea { height: 100px; resize: vertical; line-height: 1.5; }
+
+.btn-soumettre {
+  width: 100%;
+  padding: 0.85rem;
+  background-color: var(--primaire);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 0.6rem;
+  font-weight: bold;
+}
+
+.btn-soumettre:hover { background-color: var(--secondaire); transform: translateY(-1px); }
+
+.btn-annuler {
+  width: 100%;
+  padding: 0.6rem;
+  background: none;
+  color: var(--texte-clair);
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.btn-annuler:hover { border-color: var(--secondaire); color: var(--secondaire); }
+
+/* ─── Tableau ────────────────────────────── */
+.section-tableau {
+  background: white;
+  border-radius: var(--rayon);
+  padding: 1.5rem;
+  box-shadow: var(--ombre);
+  overflow-x: auto;
+}
+
+.section-tableau h2 {
+  margin-bottom: 1.2rem;
+  color: var(--primaire);
+  font-size: 1.15rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--fond);
+}
+
+.table-livres {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  min-width: 500px;
+}
+
+.table-livres th {
+  background-color: var(--primaire);
+  color: white;
+  padding: 0.8rem 1rem;
+  text-align: left;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.table-livres td {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+}
+
+.table-livres tr:last-child td { border-bottom: none; }
+.table-livres tbody tr:hover { background-color: #fafafa; }
+
+.miniature {
+  width: 40px; height: 55px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+  background: #eee;
+}
+
+.actions-tableau { display: flex; gap: 0.5rem; align-items: center; }
+
+.btn-modifier {
+  padding: 0.35rem 0.7rem;
+  background-color: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: inherit;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-modifier:hover { opacity: 0.85; transform: scale(1.05); }
+
+.btn-supprimer {
+  padding: 0.35rem 0.7rem;
+  background-color: var(--secondaire);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-family: inherit;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+
+.btn-supprimer:hover { opacity: 0.85; transform: scale(1.05); }
+
+/* ─── Notification toast ─────────────────── */
+.notification {
+  position: fixed;
+  bottom: 2rem; right: 2rem;
+  background-color: var(--succes);
+  color: white;
+  padding: 1rem 1.8rem;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.35s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.notification.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── Responsive admin ────────────────────── */
+@media (max-width: 960px) {
+  .layout-admin { grid-template-columns: 1fr; }
+  .formulaire-admin { position: static; }
+}
+
+@media (max-width: 600px) {
+  .actions-tableau { flex-direction: column; gap: 0.3rem; }
+  .btn-modifier, .btn-supprimer { width: 100%; text-align: center; }
+  .notification { bottom: 1rem; right: 1rem; left: 1rem; text-align: center; }
+}

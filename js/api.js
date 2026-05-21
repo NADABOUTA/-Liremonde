@@ -4,39 +4,75 @@
 
 const API_URL = "http://localhost:3002/livres";
 
-// ─────────────────────────────────────────────
-// GET — Récupérer tous les livres
-// ─────────────────────────────────────────────
+// GET — Tous les livres
 async function getAllLivres() {
   try {
     const response = await fetch(API_URL);
-    if (!response.ok) throw new Error("Erreur chargement livres");
-    const livres = await response.json();
-    return livres;
+    if (!response.ok) throw new Error("Erreur serveur : " + response.status);
+    return await response.json();
   } catch (error) {
-    console.error("getAllLivres:", error.message);
+    console.error("getAllLivres :", error.message);
     return [];
   }
 }
 
-// ─────────────────────────────────────────────
-// GET — Récupérer un livre par id
-// ─────────────────────────────────────────────
+// GET — Un livre par id
 async function getLivreById(id) {
   try {
     const response = await fetch(`${API_URL}/${id}`);
     if (!response.ok) throw new Error("Livre introuvable");
-    const livre = await response.json();
-    return livre;
+    return await response.json();
   } catch (error) {
-    console.error("getLivreById:", error.message);
+    console.error("getLivreById :", error.message);
     return null;
   }
 }
 
-// ─────────────────────────────────────────────
-// PATCH — Ajouter / retirer de la liste À lire
-// ─────────────────────────────────────────────
+// POST — Ajouter un livre
+async function ajouterLivre(data) {
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) throw new Error("Erreur lors de l'ajout");
+    return await response.json();
+  } catch (error) {
+    console.error("ajouterLivre :", error.message);
+    return null;
+  }
+}
+
+// PUT — Modifier un livre complet
+async function modifierLivre(id, data) {
+  try {
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) throw new Error("Erreur lors de la modification");
+    return await response.json();
+  } catch (error) {
+    console.error("modifierLivre :", error.message);
+    return null;
+  }
+}
+
+// DELETE — Supprimer un livre
+async function supprimerLivre(id) {
+  try {
+    const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+    if (!response.ok) throw new Error("Erreur lors de la suppression");
+    return true;
+  } catch (error) {
+    console.error("supprimerLivre :", error.message);
+    return false;
+  }
+}
+
+// PATCH — Basculer aLire (true/false)
 async function toggleALire(id, valeur) {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
@@ -45,10 +81,9 @@ async function toggleALire(id, valeur) {
       body: JSON.stringify({ aLire: valeur }),
     });
     if (!response.ok) throw new Error("Erreur toggle À lire");
-    const livre = await response.json();
-    return livre;
+    return await response.json();
   } catch (error) {
-    console.error("toggleALire:", error.message);
+    console.error("toggleALire :", error.message);
     return null;
   }
 }
