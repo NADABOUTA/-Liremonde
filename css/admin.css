@@ -1,7 +1,6 @@
-/* ============================================
-   admin.css — Styles page Administration
-   ============================================ */
+/* admin.css — Styles page Administration*/
 
+/* ─── Layout ─────────────────────────────── */
 .layout-admin {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -27,7 +26,10 @@
   border-bottom: 2px solid var(--fond);
 }
 
-.groupe-champ { margin-bottom: 1rem; }
+/* ─── Champs ─────────────────────────────── */
+.groupe-champ {
+  margin-bottom: 1rem;
+}
 
 .groupe-champ label {
   display: block;
@@ -59,39 +61,59 @@
   box-shadow: 0 0 0 3px rgba(44,62,80,0.1);
 }
 
-.groupe-champ textarea { height: 100px; resize: vertical; line-height: 1.5; }
+.groupe-champ textarea {
+  height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
 
+/* ─── Buttons form ───────────────────────── */
 .btn-soumettre {
   width: 100%;
   padding: 0.85rem;
+
   background-color: var(--primaire);
   color: white;
+
   border: none;
   border-radius: 8px;
+
   font-size: 1rem;
+  font-weight: bold;
   font-family: inherit;
+
   cursor: pointer;
   transition: var(--transition);
+
   margin-bottom: 0.6rem;
-  font-weight: bold;
 }
 
-.btn-soumettre:hover { background-color: var(--secondaire); transform: translateY(-1px); }
+.btn-soumettre:hover {
+  background-color: var(--secondaire);
+  transform: translateY(-1px);
+}
 
 .btn-annuler {
   width: 100%;
   padding: 0.6rem;
+
   background: none;
   color: var(--texte-clair);
+
   border: 2px solid #e0e0e0;
   border-radius: 8px;
+
   cursor: pointer;
   font-size: 0.9rem;
   font-family: inherit;
+
   transition: var(--transition);
 }
 
-.btn-annuler:hover { border-color: var(--secondaire); color: var(--secondaire); }
+.btn-annuler:hover {
+  border-color: var(--secondaire);
+  color: var(--secondaire);
+}
 
 /* ─── Tableau ────────────────────────────── */
 .section-tableau {
@@ -124,86 +146,132 @@
   text-align: left;
   font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
 .table-livres td {
   padding: 0.8rem 1rem;
   border-bottom: 1px solid #f0f0f0;
-  vertical-align: middle;
 }
 
-.table-livres tr:last-child td { border-bottom: none; }
-.table-livres tbody tr:hover { background-color: #fafafa; }
+.table-livres tr:hover {
+  background-color: #fafafa;
+}
 
+/* ─── Image ──────────────────────────────── */
 .miniature {
-  width: 40px; height: 55px;
+  width: 40px;
+  height: 55px;
   object-fit: cover;
   border-radius: 4px;
-  display: block;
   background: #eee;
 }
 
-.actions-tableau { display: flex; gap: 0.5rem; align-items: center; }
-
-.btn-modifier {
-  padding: 0.35rem 0.7rem;
-  background-color: var(--accent);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-family: inherit;
-  transition: var(--transition);
-  white-space: nowrap;
+/* ─── Actions ────────────────────────────── */
+.actions-tableau {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-.btn-modifier:hover { opacity: 0.85; transform: scale(1.05); }
+/* colonne actions */
+.table-livres td:last-child {
+  text-align: center;
+}
 
+/* div li fih les boutons */
+.actions-tableau {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-modifier,
 .btn-supprimer {
   padding: 0.35rem 0.7rem;
-  background-color: var(--secondaire);
+
   color: white;
   border: none;
   border-radius: 5px;
+
   cursor: pointer;
   font-size: 0.8rem;
   font-family: inherit;
+
   transition: var(--transition);
   white-space: nowrap;
 }
 
-.btn-supprimer:hover { opacity: 0.85; transform: scale(1.05); }
+.btn-modifier {
+  background-color: var(--accent);
+}
 
-/* ─── Notification toast ─────────────────── */
+.btn-supprimer {
+  background-color: var(--secondaire);
+}
+
+.btn-modifier:hover,
+.btn-supprimer:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* ─── Notification ───────────────────────── */
 .notification {
   position: fixed;
-  bottom: 2rem; right: 2rem;
+  bottom: 2rem;
+  right: 2rem;
+
   background-color: var(--succes);
   color: white;
+
   padding: 1rem 1.8rem;
   border-radius: 10px;
+
   font-size: 0.95rem;
-  font-family: inherit;
+
   box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+
   opacity: 0;
   transform: translateY(20px);
+
   transition: all 0.35s ease;
+
   z-index: 9999;
   pointer-events: none;
 }
 
-.notification.visible { opacity: 1; transform: translateY(0); }
+.notification.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-/* ─── Responsive admin ────────────────────── */
+/* ─── Responsive ─────────────────────────── */
 @media (max-width: 960px) {
-  .layout-admin { grid-template-columns: 1fr; }
-  .formulaire-admin { position: static; }
+  .layout-admin {
+    grid-template-columns: 1fr;
+  }
+
+  .formulaire-admin {
+    position: static;
+  }
 }
 
 @media (max-width: 600px) {
-  .actions-tableau { flex-direction: column; gap: 0.3rem; }
-  .btn-modifier, .btn-supprimer { width: 100%; text-align: center; }
-  .notification { bottom: 1rem; right: 1rem; left: 1rem; text-align: center; }
+  .actions-tableau {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .btn-modifier,
+  .btn-supprimer {
+    width: 100%;
+    text-align: center;
+  }
+
+  .notification {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    text-align: center;
+  }
 }

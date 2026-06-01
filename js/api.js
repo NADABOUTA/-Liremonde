@@ -1,10 +1,9 @@
-// ============================================
 // api.js — Toutes les requêtes vers JSON Server
-// ============================================
 
 const API_URL = "http://localhost:3002/livres";
 
 // GET — Tous les livres
+
 async function getAllLivres() {
   try {
     const response = await fetch(API_URL);
@@ -17,6 +16,7 @@ async function getAllLivres() {
 }
 
 // GET — Un livre par id
+
 async function getLivreById(id) {
   try {
     const response = await fetch(`${API_URL}/${id}`);
@@ -29,12 +29,14 @@ async function getLivreById(id) {
 }
 
 // POST — Ajouter un livre
+
 async function ajouterLivre(data) {
   try {
+    const nextId = await getNextId();  
     const response = await fetch(API_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ ...data, id: nextId }),
     });
     if (!response.ok) throw new Error("Erreur lors de l'ajout");
     return await response.json();
@@ -45,6 +47,7 @@ async function ajouterLivre(data) {
 }
 
 // PUT — Modifier un livre complet
+
 async function modifierLivre(id, data) {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
@@ -61,6 +64,7 @@ async function modifierLivre(id, data) {
 }
 
 // DELETE — Supprimer un livre
+
 async function supprimerLivre(id) {
   try {
     const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
@@ -73,6 +77,7 @@ async function supprimerLivre(id) {
 }
 
 // PATCH — Basculer aLire (true/false)
+
 async function toggleALire(id, valeur) {
   try {
     const response = await fetch(`${API_URL}/${id}`, {
@@ -86,4 +91,11 @@ async function toggleALire(id, valeur) {
     console.error("toggleALire :", error.message);
     return null;
   }
+}
+// GET — Prochain ID numérique disponible
+async function getNextId() {
+  const livres = await getAllLivres();
+  if (livres.length === 0) return 1;
+  const maxId = Math.max(...livres.map(l => parseInt(l.id) || 0));
+  return maxId + 1;
 }

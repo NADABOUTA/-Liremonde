@@ -2,21 +2,19 @@
   "livres": [
     {
       "id": "1",
-      "titre": "Le Petit Prince",
-      "auteur": "Antoine de Saint-Exupéry",
+      "titre": "Fables",
+      "auteur": "J. La Fontaine",
       "genre": "Classique",
-      "description": "Un aviateur tombe en panne dans le désert du Sahara et rencontre un mystérieux petit garçon venu d'une autre planète. Une fable poétique et philosophique sur l'amitié, l'amour et la perte de l'innocence.",
-      "couverture": "https://covers.openlibrary.org/b/id/8739161-L.jpg",
-      "aLire": true
+      "description": "Les Fables de La Fontaine regroupent plusieurs histoires courtes mettant en scène des animaux pour transmettre des leçons de morale. Ces récits restent parmi les œuvres les plus célèbres de la littérature française.",
+      "couverture": "https://covers.openlibrary.org/b/id/5918789-M.jpg"
     },
     {
       "id": "2",
-      "titre": "Dune",
-      "auteur": "Frank Herbert",
-      "genre": "Science-fiction",
-      "description": "Sur la planète désertique Arrakis, la seule source d'épice mélange, substance la plus précieuse de l'univers, Paul Atreides découvre sa destinée au milieu d'intrigues politiques et de prophéties millénaires.",
-      "couverture": "https://covers.openlibrary.org/b/id/8737937-L.jpg",
-      "aLire": true
+      "titre": "frankenstein",
+      "auteur": "Mary Shelley",
+      "genre": "Fantasy",
+      "description": "Victor Frankenstein crée une créature à partir de morceaux de corps humains, mais son expérience tourne rapidement au cauchemar. Ce roman mélange science, peur et réflexion sur les limites de l’humanité.",
+      "couverture": "https://covers.openlibrary.org/b/id/12154892-M.jpg"
     },
     {
       "id": "3",
@@ -25,7 +23,7 @@
       "genre": "Drame",
       "description": "L'histoire de Jean Valjean, ancien forçat cherchant sa rédemption dans une France du XIXe siècle marquée par la misère, l'injustice sociale et les luttes révolutionnaires.",
       "couverture": "https://covers.openlibrary.org/b/id/8406786-L.jpg",
-      "aLire": true
+      "aLire": false
     },
     {
       "id": "4",
@@ -55,31 +53,12 @@
       "aLire": false
     },
     {
-      "id": "7",
-      "titre": "Madame Bovary",
-      "auteur": "Gustave Flaubert",
-      "genre": "Classique",
-      "description": "Emma Bovary, femme d'un médecin de campagne, cherche désespérément à fuir la médiocrité de sa vie à travers des aventures amoureuses. Un chef-d'œuvre du réalisme français.",
-      "couverture": "https://covers.openlibrary.org/b/id/8736782-L.jpg",
-      "aLire": false
-    },
-    {
-      "id": "8",
       "titre": "Roméo et Juliette",
-      "auteur": "William Shakespeare",
+      "auteur": "W.Shakespeare",
       "genre": "Drame",
       "description": "L'histoire tragique de deux jeunes amants issus de familles ennemies dans la ville de Vérone. Une pièce intemporelle sur l'amour absolu et ses conséquences fatales.",
       "couverture": "https://covers.openlibrary.org/b/id/8739696-L.jpg",
-      "aLire": true
-    },
-    {
-      "titre": "La princesse NADA",
-      "auteur": "NADA",
-      "genre": "Romance",
-      "description": "AZEDRFGHJNK?.?NBVCXDFTGYUHJIKOLMKJHGFDCVHGFXCV VCDFTGYUH",
-      "couverture": "",
-      "aLire": false,
-      "id": "Y-Cj7Zde668"
+      "id": "8"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

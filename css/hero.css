@@ -20,8 +20,6 @@
   text-align: center;
 }
 
-
-
 /* ─── Contenu texte ───────────────── */
 .hero-contenu {
   flex: 1;
@@ -32,12 +30,12 @@
 
   animation: glisser-gauche 0.8s ease both;
 
-  text-align: center;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  text-align: center;
 }
 
 @keyframes glisser-gauche {
@@ -45,18 +43,19 @@
     opacity: 0;
     transform: translateY(40px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+/* ─── Badge ───────────────────────── */
 .hero-badge {
   display: inline-block;
 
   background: rgba(243,156,18,0.2);
   color: #f39c12;
+
   border: 1px solid rgba(243,156,18,0.4);
 
   padding: 0.4rem 1rem;
@@ -64,10 +63,9 @@
 
   font-size: 0.85rem;
   margin-bottom: 1.5rem;
-
-  text-align: center;
 }
 
+/* ─── Titre ───────────────────────── */
 .hero-titre {
   font-size: 3.2rem;
   font-weight: bold;
@@ -77,7 +75,6 @@
   margin-bottom: 1.5rem;
 
   font-family: Georgia, serif;
-  text-align: center;
 }
 
 .hero-titre-accent {
@@ -88,7 +85,6 @@
 
 .hero-titre-accent::after {
   content: "";
-
   position: absolute;
   left: 0;
   bottom: -4px;
@@ -100,6 +96,7 @@
   border-radius: 2px;
 }
 
+/* ─── Description ─────────────────── */
 .hero-description {
   font-size: 1.1rem;
   color: rgba(255,255,255,0.75);
@@ -108,19 +105,15 @@
   margin-bottom: 2.5rem;
 
   max-width: 460px;
-  text-align: center;
 }
 
-/* ─── Boutons hero ───────────────────────── */
-
+/* ─── Boutons ─────────────────────── */
 .hero-actions {
   display: flex;
   justify-content: center;
   align-items: center;
 
   gap: 1rem;
-  margin-bottom: 3rem;
-
   flex-wrap: wrap;
 }
 
@@ -137,15 +130,11 @@
 
   transition: all 0.3s ease;
   display: inline-block;
-
-  text-align: center;
 }
 
 .hero-btn-principal:hover {
   background: #e67e22;
-
   transform: translateY(-2px);
-
   box-shadow: 0 8px 25px rgba(243,156,18,0.4);
 }
 
@@ -166,14 +155,11 @@
 
 .hero-btn-secondaire:hover {
   background: rgba(255,255,255,0.1);
-
   border-color: white;
-
   transform: translateY(-2px);
 }
 
-/* ─── Responsive hero ────────────────────── */
-
+/* ─── Responsive ───────────────────── */
 @media (max-width: 1100px) {
   .hero {
     padding: 4rem 3rem;
@@ -190,40 +176,12 @@
     min-height: auto;
   }
 
-  .hero-contenu {
-    max-width: 100%;
-  }
-
   .hero-titre {
     font-size: 2rem;
   }
 
   .hero-description {
     max-width: 100%;
-  }
-
-  .hero-actions {
-    justify-content: center;
-  }
-
-  .hero-stats {
-    justify-content: center;
-  }
-
-  .livre-centre {
-    width: 130px;
-    height: 180px;
-  }
-
-  .livre-haut-droite,
-  .livre-bas-gauche {
-    width: 100px;
-    height: 140px;
-  }
-
-  .livre-haut-gauche {
-    width: 80px;
-    height: 115px;
   }
 }
 
@@ -234,9 +192,5 @@
 
   .hero-titre {
     font-size: 1.7rem;
-  }
-
-  .hero-badge-flottant {
-    display: none;
   }
 }

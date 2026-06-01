@@ -1,27 +1,22 @@
-// ============================================
 // main.js — Page Accueil
-// ============================================
 
 let tousLesLivres = [];
 let genreActif    = "Tous";
 let recherche     = "";
 
-// Lancement au chargement de la page
+// Chargement initial de la page
 document.addEventListener("DOMContentLoaded", async () => {
   await chargerLivres();
-   ecouterRecherche();
-  //  animerCompteurHero();
+  ecouterRecherche();
 });
 
-// ─────────────────────────────────────────────
-// 1. Charger les livres depuis l'API
-// ─────────────────────────────────────────────
+// Récupère tous les livres et initialise l'affichage
 async function chargerLivres() {
   tousLesLivres = await getAllLivres();
 
   if (tousLesLivres.length === 0) {
     document.getElementById("grille-livres").innerHTML =
-      `<p class="message-vide"> Aucun livre disponible. Vérifiez que JSON Server est démarré.</p>`;
+      `<p class="message-vide">📭 Aucun livre disponible. Vérifiez que JSON Server est démarré.</p>`;
     return;
   }
 
@@ -29,9 +24,7 @@ async function chargerLivres() {
   afficherLivresFiltres();
 }
 
-// ─────────────────────────────────────────────
-// 2. Générer les boutons de filtre par genre
-// ─────────────────────────────────────────────
+// Génère les boutons de filtre par genre à partir des données
 function genererFiltres() {
   const conteneur = document.getElementById("filtres-genre");
   conteneur.innerHTML = "";
@@ -44,6 +37,7 @@ function genererFiltres() {
     btn.classList.add("btn-filtre");
     if (genre === genreActif) btn.classList.add("actif");
 
+    // Au clic, active le filtre choisi et rafraîchit la grille
     btn.addEventListener("click", () => {
       genreActif = genre;
       document.querySelectorAll(".btn-filtre").forEach(b => b.classList.remove("actif"));
@@ -55,9 +49,7 @@ function genererFiltres() {
   });
 }
 
-// ─────────────────────────────────────────────
-// 3. Filtrer + rechercher + afficher
-// ─────────────────────────────────────────────
+// Filtre les livres par genre et par recherche, puis les affiche
 function afficherLivresFiltres() {
   let livresFiltres = tousLesLivres;
 
@@ -73,61 +65,38 @@ function afficherLivresFiltres() {
     );
   }
 
-  afficherGrille(livresFiltres);
-}
-
-// ─────────────────────────────────────────────
-// 4. Afficher la grille de cartes
-// ─────────────────────────────────────────────
-function afficherGrille(livres) {
   const grille = document.getElementById("grille-livres");
   grille.innerHTML = "";
 
-  if (livres.length === 0) {
-    grille.innerHTML = `<p class="message-vide"> Aucun livre trouvé.</p>`;
+  if (livresFiltres.length === 0) {
+    grille.innerHTML = `<p class="message-vide">Aucun livre trouvé.</p>`;
     return;
   }
 
-  livres.forEach(livre => grille.appendChild(creerCarteLivre(livre)));
+  livresFiltres.forEach(livre => grille.appendChild(creerCarteLivre(livre)));
 }
 
-// ─────────────────────────────────────────────
-// 5. Créer une carte livre
-// ─────────────────────────────────────────────
+// Crée la carte HTML d'un livre pour la grille principale
 function creerCarteLivre(livre) {
   const carte = document.createElement("div");
   carte.classList.add("carte-livre");
 
-  const fallback =
-    "https://via.placeholder.com/200x280/2c3e50/ffffff?text=📚";
+  const fallback = "https://via.placeholder.com/200x280/2c3e50/ffffff?text=📚";
 
   carte.innerHTML = `
     <div class="carte-image">
-      <img 
-        src="${livre.couverture}" 
-        alt="${livre.titre}"
-         onerror="this.onerror=null; this.src='${fallback}';"
-      />
-    </div>
-
-    <div class="carte-info">
+      <img src="${livre.couverture || fallback}" alt="${livre.titre}"
+           onerror="this.onerror=null; this.src='${fallback}';" />
       <span class="badge-genre">${livre.genre}</span>
-
+    </div>
+    <div class="carte-info">
       <h3 class="carte-titre">${livre.titre}</h3>
-
       <p class="carte-auteur">${livre.auteur}</p>
-
       <div class="carte-actions">
-        <button 
-          class="btn-details" 
-          onclick="ouvrirModale(${livre.id})">
-          Détails
-        </button>
-
-        <button 
-          class="btn-alire ${livre.aLire ? "actif" : ""}"
-          onclick="basculerALire(event, ${livre.id})">
-          ${livre.aLire ? "Retiré" : "À lire"}
+        <button class="btn-details" onclick="ouvrirModale(${livre.id})">Détails</button>
+        <button class="btn-alire ${livre.aLire ? "actif" : ""}"
+                onclick="basculerALire(event, ${livre.id})">
+          ${livre.aLire ? "❤️ Retiré" : "🤍 À lire"}
         </button>
       </div>
     </div>
@@ -136,9 +105,7 @@ function creerCarteLivre(livre) {
   return carte;
 }
 
-// ─────────────────────────────────────────────
-// 6. Recherche en temps réel
-// ─────────────────────────────────────────────
+// Écoute la saisie dans la barre de recherche et rafraîchit la grille
 function ecouterRecherche() {
   const input = document.getElementById("barre-recherche");
   if (!input) return;
@@ -148,24 +115,23 @@ function ecouterRecherche() {
   });
 }
 
-// ─────────────────────────────────────────────
-// 7. Ouvrir la modale
-// ─────────────────────────────────────────────
+// Ouvre la modale avec les détails du livre sélectionné
 async function ouvrirModale(id) {
   const livre = await getLivreById(id);
   if (!livre) return;
 
-  document.getElementById("modale-image").src             = livre.couverture || "";
-  document.getElementById("modale-image").alt             = livre.titre;
-  document.getElementById("modale-titre").textContent     = livre.titre;
-  document.getElementById("modale-auteur").textContent    = livre.auteur;
-  document.getElementById("modale-genre").textContent     = livre.genre;
+  document.getElementById("modale-image").src               = livre.couverture || "";
+  document.getElementById("modale-image").alt               = livre.titre;
+  document.getElementById("modale-titre").textContent       = livre.titre;
+  document.getElementById("modale-auteur").textContent      = livre.auteur;
+  document.getElementById("modale-genre").textContent       = livre.genre;
   document.getElementById("modale-description").textContent = livre.description;
 
   const btn = document.getElementById("modale-btn-alire");
-  btn.textContent = livre.aLire ? " Retirer de la liste" : " Ajouter à la liste";
+  btn.textContent = livre.aLire ? "❤️ Retirer de la liste" : "🤍 Ajouter à la liste";
   btn.className   = "btn-alire " + (livre.aLire ? "actif" : "");
 
+  // Bascule l'état "à lire" depuis la modale et met à jour l'affichage
   btn.onclick = async () => {
     const nouvelleValeur = !livre.aLire;
     const resultat = await toggleALire(livre.id, nouvelleValeur);
@@ -173,7 +139,7 @@ async function ouvrirModale(id) {
       livre.aLire = nouvelleValeur;
       const livreLocal = tousLesLivres.find(l => l.id === livre.id);
       if (livreLocal) livreLocal.aLire = nouvelleValeur;
-      btn.textContent = nouvelleValeur ? " Retirer de la liste" : " Ajouter à la liste";
+      btn.textContent = nouvelleValeur ? "❤️ Retirer de la liste" : "🤍 Ajouter à la liste";
       btn.className   = "btn-alire " + (nouvelleValeur ? "actif" : "");
       afficherLivresFiltres();
     }
@@ -182,14 +148,12 @@ async function ouvrirModale(id) {
   document.getElementById("modale").classList.remove("cachee");
 }
 
-// ─────────────────────────────────────────────
-// 8. Fermer la modale
-// ─────────────────────────────────────────────
+// Ferme la modale
 function fermerModale() {
   document.getElementById("modale").classList.add("cachee");
 }
 
-// Fermer avec clic sur fond ou touche Échap
+// Ferme la modale en cliquant en dehors ou avec Échap
 document.addEventListener("click", e => {
   if (e.target === document.getElementById("modale")) fermerModale();
 });
@@ -197,9 +161,7 @@ document.addEventListener("keydown", e => {
   if (e.key === "Escape") fermerModale();
 });
 
-// ─────────────────────────────────────────────
-// 9. Toggle À lire depuis carte
-// ─────────────────────────────────────────────
+// Bascule l'état "à lire" d'un livre depuis la carte (sans propager le clic)
 async function basculerALire(event, id) {
   event.stopPropagation();
   const livre = tousLesLivres.find(l => l.id === id);
@@ -210,19 +172,3 @@ async function basculerALire(event, id) {
     afficherLivresFiltres();
   }
 }
-
-// ─────────────────────────────────────────────
-// 10. Compteur animé dans le hero
-// ─────────────────────────────────────────────
-// async function animerCompteurHero() {
-//   const el = document.getElementById("stat-livres");
-//   if (!el) return;
-//   const livres = await getAllLivres();
-//   const total  = livres.length;
-//   let compteur = 0;
-//   const intervalle = setInterval(() => {
-//     compteur++;
-//     el.textContent = compteur;
-//     if (compteur >= total) clearInterval(intervalle);
-//   }, 150);
-// }
