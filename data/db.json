@@ -1,12 +1,13 @@
 {
   "livres": [
     {
-      "id": "1",
       "titre": "Fables",
       "auteur": "J. La Fontaine",
       "genre": "Classique",
       "description": "Les Fables de La Fontaine regroupent plusieurs histoires courtes mettant en scène des animaux pour transmettre des leçons de morale. Ces récits restent parmi les œuvres les plus célèbres de la littérature française.",
-      "couverture": "https://covers.openlibrary.org/b/id/5918789-M.jpg"
+      "couverture": "https://covers.openlibrary.org/b/id/5918789-M.jpg",
+      "id": "1",
+      "aLire": true
     },
     {
       "id": "2",
@@ -58,7 +59,8 @@
       "genre": "Drame",
       "description": "L'histoire tragique de deux jeunes amants issus de familles ennemies dans la ville de Vérone. Une pièce intemporelle sur l'amour absolu et ses conséquences fatales.",
       "couverture": "https://covers.openlibrary.org/b/id/8739696-L.jpg",
-      "id": "8"
+      "id": "8",
+      "aLire": false
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

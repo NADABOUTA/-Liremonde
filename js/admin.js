@@ -1,12 +1,9 @@
-
 let editId = null;
-
 // Load page
 document.addEventListener("DOMContentLoaded", () => {
   loadBooks();
   handleForm();
 });
-
 
 // READ - table
 async function loadBooks() {
@@ -46,7 +43,6 @@ async function loadBooks() {
   });
 }
 
-
 // CREATE + UPDATE
 function handleForm() {
   const form = document.getElementById("form-livre");
@@ -81,7 +77,6 @@ function handleForm() {
   });
 }
 
-
 // EDIT
 async function editBook(id) {
   const book = await getLivreById(id);
@@ -96,13 +91,10 @@ async function editBook(id) {
   document.getElementById("input-genre").value = book.genre || "";
   document.getElementById("input-description").value = book.description || "";
   document.getElementById("input-couverture").value = book.couverture || "";
-
   editId = id;
-
   const btn = document.getElementById("btn-submit");
   if (btn) btn.textContent = "Modifier";
 }
-
 
 // DELETE
 async function deleteBook(id) {

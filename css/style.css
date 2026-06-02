@@ -144,7 +144,17 @@ a { text-decoration: none; color: inherit; }
 }
 
 .carte-image .badge-genre {
-  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: var(--secondaire);
+  color: white;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  display: inline-block;
+  z-index: 2;
 }
 .carte-info { padding: 1rem; }
 
